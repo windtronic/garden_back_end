@@ -3,6 +3,7 @@ from . import views
 from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
+    
     path('', views.PlantList.as_view(), name='plant_list'),
     path('plants/', views.PlantList.as_view(), name='plant_list'),
     path('plant_listings/', views.PlantListingList.as_view(), name='plant_listing_list'),
