@@ -45,14 +45,14 @@ class PlantListing(models.Model):
     seed_depth = models.CharField(max_length=100, null=True, blank=True, default='')
     sunlight_needs = models.CharField(max_length=200, null=True, blank=True, default='')
     season = models.CharField(max_length=200, null=True, blank=True, default='')
-    water_needs = models.TextField(blank=True, default='')
-    frost_tolerance = models.TextField(blank=True, default='')
+    water_needs = models.CharField(max_length=200, null=True, blank=True, default='')
+    frost_tolerance = models.CharField(max_length=200, null=True, blank=True, default='')
     germination_time = models.CharField(max_length=100, null=True, blank=True, default='')
     harvest_times = models.CharField(max_length=100, null=True, blank=True, default='')
     grow_from_seed = models.BooleanField(null=True, blank=True, default=False)
     grow_from_transplant = models.BooleanField(null=True, blank=True, default=False)
     plant_needs_fertilization = models.BooleanField(null=True, blank=True, default=False)
-    date_to_plant = models.TextField(blank=True, default='')
+    date_to_plant = models.CharField(max_length=200, null=True, blank=True, default='')
 
 
     def __str__(self):
