@@ -17,7 +17,9 @@ class PlantSerializer(serializers.ModelSerializer):
 class PlantListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantListing
-        fields = ['id', 'plant', 'name', 'row_spacing', 'seed_depth', 'sunlight_needs', 'season', 'water_needs', 'frost_tolerance', 'germination_time', 'harvest_times', 'grow_from_seed', 'grow_from_transplant', 'plant_needs_fertilization', 'date_to_plant']
+        fields = ['id', 'plant', 'name', 'row_spacing', 'seed_depth', 'sunlight_needs', 
+                  'season', 'water_needs', 'frost_tolerance', 'germination_time', 'harvest_times', 
+                  'grow_from_seed', 'grow_from_transplant', 'plant_needs_fertilization', 'date_to_plant']
 
 
 class CalendarSerializer(serializers.ModelSerializer):
