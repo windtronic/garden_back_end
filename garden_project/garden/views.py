@@ -1,25 +1,33 @@
 from django.shortcuts import get_object_or_404, render
 from rest_framework import generics
 from rest_framework.response import Response
-from .serializers import PlantSerializer, PlantListingSerializer, CalendarSerializer
-from .models import Plant, PlantListing, Calendar
+from .serializers import UserSerializer, CalendarSerializer, PlantSerializer, PlantListingSerializer
+from .models import User, Calendar, Plant, PlantListing
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class CalendarList(generics.ListCreateAPIView):
+    queryset = Calendar.objects.all()
+    serializer_class = CalendarSerializer
+
+class CalendarDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Calendar.objects.all()
+    serializer_class = CalendarSerializer
 
 class PlantList(generics.ListCreateAPIView):
-    queryset = Plant.objects.all()
+    queryset = Plant.objects.order_by('name')
     serializer_class = PlantSerializer
+
 
 class PlantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Plant.objects.all()
     serializer_class = PlantSerializer
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
 
 class PlantCreate(generics.CreateAPIView):
     queryset = Plant.objects.all()
@@ -40,11 +48,3 @@ class PlantListingList(generics.ListCreateAPIView):
 class PlantListingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = PlantListing.objects.all()
     serializer_class = PlantListingSerializer
-
-class CalendarList(generics.ListCreateAPIView):
-    queryset = Calendar.objects.all()
-    serializer_class = CalendarSerializer
-
-class CalendarDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Calendar.objects.all()
-    serializer_class = CalendarSerializer
