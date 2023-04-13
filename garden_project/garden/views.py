@@ -1,14 +1,29 @@
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework.response import Response
 from .serializers import UserSerializer, CalendarSerializer, PlantSerializer, PlantListingSerializer
 from .models import User, Calendar, Plant, PlantListing
+
+User = get_user_model()
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserUpdate(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDelete(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -48,3 +63,17 @@ class PlantListingList(generics.ListCreateAPIView):
 class PlantListingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = PlantListing.objects.all()
     serializer_class = PlantListingSerializer
+
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        user = User.objects.create_user(username, email, password)
+        user.address = address
+        user.save()
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False})
+

@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'email', 'password', 'calendars', 'plants']
 
 
+
 class PlantSerializer(serializers.ModelSerializer):
     plant_listings = serializers.HyperlinkedRelatedField(
         view_name='plant_listing_detail',
@@ -49,4 +50,5 @@ class CalendarSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Calendar
-        fields = ['id', 'user', 'frost_dates', 'plant_dates', 'harvest_times', 'fertilize_dates', 'comments', 'plant_listings']
+        fields = ['id', 'user', 'frost_dates', 'plant_dates', 'harvest_times', 'fertilize_dates', 
+                  'comments', 'plant_listings']

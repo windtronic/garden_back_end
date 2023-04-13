@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-# from rest_framework.routers import DefaultRouter
-
 
 urlpatterns = [
     path('plants/', views.PlantList.as_view(), name='plant_list'),
@@ -15,4 +13,11 @@ urlpatterns = [
 
     path('calendars/', views.CalendarList.as_view(), name='calendar_list'),
     path('calendars/<int:pk>/', views.CalendarDetail.as_view(), name='calendar_detail'),
+
+    path('users/', views.UserList.as_view(), name='user_list'),
+    path('users/create/', views.UserCreate.as_view(), name='user_create'),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='user_detail'),
+    path('users/<int:pk>/update/', views.UserUpdate.as_view(), name='user_update'),
+    path('users/<int:pk>/delete/', views.UserDelete.as_view(), name='user_delete'),
+    path('register/', views.register_view, name='register'),
 ]
