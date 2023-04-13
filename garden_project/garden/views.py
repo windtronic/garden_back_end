@@ -5,11 +5,17 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, CalendarSerializer, PlantSerializer, PlantListingSerializer
 from .models import User, Calendar, Plant, PlantListing
 
-User = get_user_model()
+
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        for user in queryset:
+            print(user.name)
+        return queryset
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
