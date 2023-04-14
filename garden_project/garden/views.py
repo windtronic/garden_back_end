@@ -1,9 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from rest_framework import generics
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import UserSerializer, CalendarSerializer, PlantSerializer, PlantListingSerializer
 from .models import User, Calendar, Plant, PlantListing
+from rest_framework.permissions import AllowAny
 
 
 
@@ -83,3 +87,16 @@ def register_view(request):
     else:
         return JsonResponse({'success': False})
 
+
+
+@csrf_exempt
+@api_view(['POST'])
+def login_view(request):
+    email = request.data.get('email')
+    password = request.data.get('password')
+    user = authenticate(request, email=email, password=password)
+    if user is not None:
+        login(request, user)
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid email or password.'})

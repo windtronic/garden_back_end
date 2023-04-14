@@ -3,6 +3,11 @@ from .models import Plant, PlantListing, Calendar, User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email']
+
+class UserSerializer(serializers.ModelSerializer):
     calendars = serializers.HyperlinkedRelatedField(
         view_name='calendar_detail',
         many=True,
