@@ -22,7 +22,7 @@ SECRET_KEY = 'django-insecure-#n2@d37s2cf+81k!j5*!d5wr6^$*n=@u7rg+h&p#*il=+n)d2f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
       "http://localhost:3000",
@@ -99,10 +99,11 @@ WSGI_APPLICATION = 'garden_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'garden',
-        'USER': 'gardenuser',
-        'PASSWORD': 'garden',
-        'HOST': 'localhost'
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'GJkuk7Bb7qgPTysgtxOG',
+        'HOST': 'containers-us-west-133.railway.app',
+        'PORT': '7689',
     }
 }
 
