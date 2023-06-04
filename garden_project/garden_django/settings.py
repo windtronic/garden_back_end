@@ -99,11 +99,11 @@ WSGI_APPLICATION = 'garden_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'GJkuk7Bb7qgPTysgtxOG',
-        'HOST': 'containers-us-west-133.railway.app',
-        'PORT': '7689',
+        'NAME': 'garden',
+        'USER': 'toni',
+        'PASSWORD': 'jennielove2018',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
