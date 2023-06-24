@@ -38,7 +38,6 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000"
 ]
 
-CSRF_COOKIE_NAME = 'csrftoken'
 
 # Application definition
 
