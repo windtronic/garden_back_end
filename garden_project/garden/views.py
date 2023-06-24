@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import generics
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import (
     UserSerializer,
@@ -108,15 +109,18 @@ def register_view(request):
         return JsonResponse({'success': False})
 
 
-@api_view(['POST'])
-@csrf_exempt
-@permission_classes([AllowAny])
 def login_view(request):
-    email = request.data.get('email')
-    password = request.data.get('password')
-    user = authenticate(request, email=email, password=password)
-    if user is not None:
-        login(request, user)
-        return JsonResponse({'success': True})
-    else:
-        return JsonResponse({'success': False, 'error': 'Invalid email or password.'})
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(email=email)
+            if user.password == password:
+                return JsonResponse({'success': True, 'message': 'Login successful'})
+            else:
+                return JsonResponse({'success': False, 'error': 'Invalid email or password'})
+        except User.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Invalid email or password'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
