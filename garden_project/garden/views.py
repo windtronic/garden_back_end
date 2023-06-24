@@ -113,12 +113,12 @@ def register_view(request):
 @permission_classes([AllowAny])
 def login_view(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        email = request.data.get('email')
+        password = request.data.get('password')
 
         try:
             user = User.objects.get(email=email)
-            if user.password == password:
+            if user.check_password(password):
                 return JsonResponse({'success': True, 'message': 'Login successful'})
             else:
                 return JsonResponse({'success': False, 'error': 'Invalid email or password'})
