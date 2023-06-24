@@ -108,7 +108,9 @@ def register_view(request):
     else:
         return JsonResponse({'success': False})
 
-
+@api_view(['POST'])
+@csrf_exempt
+@permission_classes([AllowAny])
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
