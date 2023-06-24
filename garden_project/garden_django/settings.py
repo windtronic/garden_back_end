@@ -38,6 +38,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000"
 ]
 
+CSRF_COOKIE_NAME = 'csrftoken'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,12 +55,18 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Token Authentication
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 
